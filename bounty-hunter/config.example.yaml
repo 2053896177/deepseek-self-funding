@@ -1,0 +1,21 @@
+deepseek:
+  api_key: "sk-your-deepseek-api-key"
+  base_url: "https://api.deepseek.com/v1"
+  model: "deepseek-chat"
+
+github:
+  token: "ghp_your-github-token"
+
+scanner:
+  max_results: 10
+  keywords: ["bounty", "funded", "good first issue"]
+  languages: ["python", "javascript", "typescript"]
+  state: "open"
+
+fixer:
+  temperature: 0.3
+  max_tokens: 2000
+
+output:
+  dir: "./reports"
+  format: "markdown"
