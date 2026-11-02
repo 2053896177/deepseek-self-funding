@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+
+# 配置文件（包含 API Key，不上传）
+config.yaml
+
+# 生成的产品（体积大，按需决定是否上传）
+products/*.pdf
+products/*.docx
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
