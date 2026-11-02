@@ -2,8 +2,8 @@ name: Daily Bounty Hunter
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # 每天 UTC 1:00（北京时间 9:00）跑一次
-  workflow_dispatch:  # 支持手动触发
+    - cron: '0 1 * * *'  # 每天 UTC 1:00（北京时间早上 9:00）
+  workflow_dispatch:  # 支持手动点按钮触发
 
 jobs:
   hunt:
@@ -28,7 +28,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd bounty-hunter
-          # 从 secrets 生成 config.yaml
           cat > config.yaml << EOF
           deepseek:
             api_key: "${{ secrets.DEEPSEEK_API_KEY }}"
@@ -41,7 +40,7 @@ jobs:
           scanner:
             max_results: 5
             keywords: ["bounty", "funded", "good first issue"]
-            languages: ["python", "javascript", "typescript"]
+            languages: ["python"]
             state: "open"
 
           fixer:
@@ -59,5 +58,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add bounty-hunter/reports/
-          git diff --staged --quiet || git commit -m "chore: 添加每日 bounty 报告 $(date +%Y-%m-%d)"
+          git diff --staged --quiet || git commit -m "chore: 每日报告 $(date +%Y-%m-%d)"
           git push
