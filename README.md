@@ -1,57 +1,24 @@
-# DeepSeek Self-Funding
+# deepseek-self-funding
 
-用 DeepSeek API 批量生成内容 → 被动变现 → 收入回流充值，让 API 自己养活自己的自循环系统。
+> 状态：已清空，不运行任何定时任务，不会发送通知邮件。
 
-## 两个子项目
+## 这个仓库是什么
 
-### 1. 数字产品工厂
+一次低成本实验的留档：尝试用 DeepSeek API 的免费额度做自动化，验证“能不能让 API 自己产生收益”。
 
-批量生成数字产品（申论模板、英语模板、面试题库等），挂爱发电/闲鱼售卖。
+实验结论（2026-11）：
 
-```
-scripts/          # 生成脚本
-templates/        # 各品类 Prompt 模板
-products/         # 生成的成品输出
-```
+- GitHub 开源 issue 赏金路线不成立：关键词扫到的 bounty 绝大多数是噪音；真正新手能修的 good first issue 基本没有赏金；维护者对空白账号提交的 AI 生成 PR 容忍度低。
+- 纯自动、零沟通、低成本的“被动赚钱”在当前阶段不现实，瓶颈不在 API 调用成本，而在流量、信任和人工交付能力。
+- 已删除定时工作流（Actions）、脚本和夸大的商业说明文档，仓库仅保留本说明。
 
-### 2. Bounty Hunter
+## 保留下来的经验
 
-自动扫描 GitHub 上带赏金的开源 issue，用 DeepSeek 生成修复方案，你照着提 PR 拿 bounty。
+1. 搭自动化项目前先验证关键事实（模型名、平台政策、真实数据），不要先包装成商业闭环。
+2. 定时任务（cron / Actions）默认关闭，确认稳定后再开启，避免失败通知打扰。
+3. API 调用成本很低，真正的成本是时间、流量和信任。
 
-```
-bounty-hunter/
-├── scanner.py      # 扫描带赏金的 issue
-├── fixer.py        # 调用 DeepSeek 生成修复方案
-├── run.py          # 主入口，生成每日报告
-├── reports/        # 每日报告自动输出到这里
-└── .github/workflows/  # 每天自动跑一次
-```
+## 备注
 
-## 快速开始
-
-### 数字产品工厂
-```bash
-pip install -r requirements.txt
-cp config.example.yaml config.yaml
-# 编辑 config.yaml 填入 API Key
-python scripts/generate_product.py --category shenlun
-```
-
-### Bounty Hunter
-```bash
-cd bounty-hunter
-pip install -r requirements.txt
-cp config.example.yaml config.yaml
-# 编辑 config.yaml 填入 API Key 和 GitHub Token
-python run.py
-```
-
-## 成本估算
-
-- DeepSeek flash 模型闲时输入约 0.02 元/百万 token
-- 6 元免费额度足够生成几十万字内容
-- 或足够跑 100+ 个 issue 的修复方案生成
-
-## License
-
-MIT
+- 无 Secrets、无定时任务、无对外发布内容。
+- 如不需要本仓库，可在 Settings → Danger Zone 直接删除。
